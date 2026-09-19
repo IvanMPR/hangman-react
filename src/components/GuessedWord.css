@@ -1,0 +1,12 @@
+.guessed-word-div {
+  margin-top: 60px;
+  margin-bottom: 40px;
+}
+
+.guessed-word {
+  color: #ff4500;
+  font-size: xx-large;
+  text-align: center;
+  letter-spacing: 8px;
+  text-transform: uppercase;
+}
