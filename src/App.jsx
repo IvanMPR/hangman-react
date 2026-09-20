@@ -11,6 +11,23 @@ import "./App.css";
 function App() {
   const [countries, setCountries] = useState([]);
   const [currentCountryName, setCurrentCountryName] = useState(null);
+  const [guess, setGuess] = useState("");
+  const [previousGuesses, setPreviousGuesses] = useState([]);
+
+  const misses = currentCountryName
+    ? previousGuesses.filter(
+        letter => !currentCountryName.toUpperCase().includes(letter),
+      ).length
+    : 0;
+
+  useEffect(() => {
+    if (misses >= 10) {
+      alert(`You lost ! :( Hidden state was : ${currentCountryName}`);
+      setPreviousGuesses([]);
+      setGuess("");
+      setCurrentCountryName(shuffle([countries])[0]);
+    }
+  }, [currentCountryName, misses, countries]);
 
   useEffect(() => {
     async function loadCountries() {
@@ -33,13 +50,20 @@ function App() {
     loadCountries();
   }, []);
 
-  console.log(countries, currentCountryName);
   return (
     <>
       <h1>Hangman Game - React</h1>
-      <Gallows />
-      <GuessedWord currentCountryName={currentCountryName} />
-      <UserInputs />
+      <Gallows misses={misses} />
+      <GuessedWord
+        currentCountryName={currentCountryName}
+        previousGuesses={previousGuesses}
+      />
+      <UserInputs
+        guess={guess}
+        setGuess={setGuess}
+        previousGuesses={previousGuesses}
+        setPreviousGuesses={setPreviousGuesses}
+      />
     </>
   );
 }

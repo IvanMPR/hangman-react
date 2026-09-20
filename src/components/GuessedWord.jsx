@@ -1,9 +1,22 @@
 import "./GuessedWord.css";
 
-export default function GuessedWord({ currentCountryName }) {
+export default function GuessedWord({
+  currentCountryName,
+  // setMisses,
+  previousGuesses,
+}) {
   function hideLetters(word) {
     if (word) {
-      return word.replace(/[a-zA-Z]/g, "_");
+      const wordToLetters = word.toUpperCase().split("");
+
+      const parsedLetters = wordToLetters.map(letter => {
+        if (letter === " ") return " ";
+        if (previousGuesses.includes(letter)) {
+          // setMisses(prev => prev + 1);
+          return letter;
+        } else return "_";
+      });
+      return parsedLetters.join("");
     }
   }
   return (

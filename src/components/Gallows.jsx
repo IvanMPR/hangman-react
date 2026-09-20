@@ -1,10 +1,11 @@
-import GallowsInitialImage from "../assets/images/Hang0.png";
+// import GallowsInitialImage from "../assets/images/Hang0.png";
 import "./Gallows.css";
 
-export default function Gallows() {
+export default function Gallows({ misses }) {
   return (
     <div className='gallows'>
-      <img src={GallowsInitialImage} alt='Initial image' />
+      {console.log(misses, "from gallows")}
+      <img src={`/images/Hang${misses}.png`} />
     </div>
   );
 }

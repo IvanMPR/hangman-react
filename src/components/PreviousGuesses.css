@@ -17,3 +17,11 @@
   letter-spacing: 3px;
   text-align: center;
 }
+
+.previous-guesses span {
+  margin-right: 6px;
+}
+
+.guessed {
+  color: #ff4500;
+}
