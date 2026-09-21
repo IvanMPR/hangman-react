@@ -9,6 +9,7 @@ export default function UserInputs({
   setMisses,
   previousGuesses,
   setPreviousGuesses,
+  currentCountryName,
 }) {
   return (
     <div className='user-inputs'>
@@ -18,6 +19,7 @@ export default function UserInputs({
         previousGuesses={previousGuesses}
         setPreviousGuesses={setPreviousGuesses}
         setMisses={setMisses}
+        currentCountryName={currentCountryName}
       />
       <PreviousGuesses previousGuesses={previousGuesses} />
     </div>

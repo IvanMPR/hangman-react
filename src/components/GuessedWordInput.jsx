@@ -1,13 +1,14 @@
 import { useRef } from "react";
 
 import "./GuessedWordInput.css";
+import { playSound } from "../utils/sounds";
 
 export default function GuessedWordInput({
   guess,
   setGuess,
-
   previousGuesses,
   setPreviousGuesses,
+  currentCountryName,
 }) {
   const inputRef = useRef(null);
 
@@ -16,13 +17,15 @@ export default function GuessedWordInput({
     if (!letter || previousGuesses.includes(letter)) {
       setGuess("");
       inputRef.current?.focus();
-      // create notification that letter has already been used
+
       alert("You already used that letter");
       return;
     }
     setPreviousGuesses(prev => [...prev, letter]);
     setGuess("");
     inputRef.current?.focus();
+    const isHit = currentCountryName.toUpperCase().includes(letter);
+    playSound(isHit ? "hit" : "miss");
   }
 
   return (
