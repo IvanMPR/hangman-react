@@ -25,6 +25,13 @@ function App() {
       ).length
     : 0;
 
+  const isWon =
+    Boolean(currentCountryName) &&
+    currentCountryName
+      .toUpperCase()
+      .split("")
+      .every(letter => letter === " " || previousGuesses.includes(letter));
+
   async function loadCountries() {
     const res = await fetch("http://127.0.0.1:3000/api/v1/states");
     if (!res.ok) throw new Error(`Request failed: ${res.status}`);
@@ -60,16 +67,24 @@ function App() {
     }
   }, [isGamePlayed, misses, currentCountryName]);
 
+  useEffect(() => {
+    if (isGamePlayed && isWon) {
+      setIsGamePlayed(false);
+      playSound("win");
+      alert(`You won! The state was: ${currentCountryName}`);
+    }
+  }, [isGamePlayed, isWon, currentCountryName]);
   return (
     <>
       <h1>Hangman Game - React</h1>
       <Gallows misses={misses} />
+      <GuessedWord
+        currentCountryName={currentCountryName}
+        previousGuesses={previousGuesses}
+        isGamePlayed={isGamePlayed}
+      />
       {isGamePlayed ? (
         <>
-          <GuessedWord
-            currentCountryName={currentCountryName}
-            previousGuesses={previousGuesses}
-          />
           <UserInputs
             guess={guess}
             setGuess={setGuess}
