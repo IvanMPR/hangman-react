@@ -1,7 +1,10 @@
-import { playSound } from "../utils/sounds";
 import "./GuessedWord.css";
 
-export default function GuessedWord({ currentCountryName, previousGuesses }) {
+export default function GuessedWord({
+  isGamePlayed,
+  currentCountryName,
+  previousGuesses,
+}) {
   function processWord(word) {
     if (word) {
       const wordToLetters = word.toUpperCase().split("");
@@ -12,16 +15,17 @@ export default function GuessedWord({ currentCountryName, previousGuesses }) {
         } else return "_";
       });
       const parsedWord = parsedLetters.join("");
-      if (!parsedWord.includes("_")) {
-        playSound("win");
-      }
       return parsedWord;
     }
   }
 
   return (
     <div className='guessed-word-div'>
-      <h2 className='guessed-word'>{processWord(currentCountryName)}</h2>
+      <h2 className='guessed-word'>
+        {!isGamePlayed
+          ? "guess the hidden word"
+          : processWord(currentCountryName)}
+      </h2>
     </div>
   );
 }

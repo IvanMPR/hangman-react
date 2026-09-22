@@ -12,15 +12,19 @@ export default function GuessedWordInput({
 }) {
   const inputRef = useRef(null);
 
+  function displayMessage(message) {
+    return <p className='message'>{message}</p>;
+  }
+
   function handleGuess() {
     const letter = guess.trim().toUpperCase();
     if (!letter || previousGuesses.includes(letter)) {
+      displayMessage("You already used that letter");
       setGuess("");
       inputRef.current?.focus();
-
-      alert("You already used that letter");
       return;
     }
+
     setPreviousGuesses(prev => [...prev, letter]);
     setGuess("");
     inputRef.current?.focus();
