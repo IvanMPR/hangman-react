@@ -1,15 +1,9 @@
 import "./StartButton.css";
 
-export default function StartButton({
-  onStart,
-  disabled,
-  label = "Start Game",
-}) {
+export default function StartButton() {
   return (
     <div className='start-button-div'>
-      <button className='start-button' onClick={onStart} disabled={disabled}>
-        {label}
-      </button>
+      <button className='start-button'>Start Game</button>
     </div>
   );
 }
