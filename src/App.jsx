@@ -2,13 +2,16 @@ import Gallows from "./components/Gallows";
 import GuessedWord from "./components/GuessedWord";
 import UserInputs from "./components/UserInputs";
 import StartButton from "./components/StartButton";
+import Title from "./components/Title";
 
 import "./App.css";
+import { useState } from "react";
 
 function App() {
+  const [isGamePlayed, setIsGamePlayed] = useState(false);
   return (
     <>
-      <h1>Hangman Game - React</h1>
+      <Title />
       <Gallows />
       <GuessedWord />
       <UserInputs />
