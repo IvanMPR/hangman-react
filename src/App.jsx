@@ -14,8 +14,11 @@ function App() {
       <Title />
       <Gallows />
       <GuessedWord />
-      <UserInputs />
-      <StartButton />
+      {isGamePlayed && <UserInputs />}
+      <StartButton
+        isGamePlayed={isGamePlayed}
+        setIsGamePlayed={setIsGamePlayed}
+      />
     </>
   );
 }
