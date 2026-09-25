@@ -1,10 +1,5 @@
 .user-inputs {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-}
-
-.user-inputs-wrapper {
-  display: flex;
-  justify-content: space-between;
+  margin-bottom: 10px;
 }

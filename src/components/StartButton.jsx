@@ -1,28 +1,21 @@
 import "./StartButton.css";
+import fetchStates from "../utils/api";
 
 export default function StartButton({
+  states,
   setStates,
   isGamePlayed,
   setIsGamePlayed,
+  setMessage,
 }) {
-  const fetchStates = async () => {
-    const response = await fetch("http://localhost:3000/api/v1/states");
-    if (!response.ok) throw new Error("Fetching data failed !");
-    const data = await response.json();
-    const names = data?.data?.states.map(currentState => currentState.state);
-    if (!Array.isArray(names)) throw new Error("Unexpected payload shape");
-    return names;
-  };
-  //  setStates(names);
-  //   console.log(data.data.states, "from use effect");
-  //   console.log(states[0], "from use effect");
   async function onStart() {
-    setIsGamePlayed(true);
     try {
-      const names = await fetchStates();
+      const names = states.length ? states : await fetchStates();
       setStates(names);
+      setIsGamePlayed(true);
     } catch (error) {
       console.log(error);
+      setMessage(error.message);
     }
   }
   return (
