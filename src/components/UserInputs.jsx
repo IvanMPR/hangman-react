@@ -6,7 +6,7 @@ import "./UserInputs.css";
 export default function UserInputs() {
   return (
     <div className='user-inputs'>
-      <UiMessages />
+      {<UiMessages />}
       <div className='user-inputs-wrapper'>
         <GuessedWordInput />
         <PreviousGuesses />

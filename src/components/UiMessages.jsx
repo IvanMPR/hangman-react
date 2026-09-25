@@ -1,5 +1,5 @@
 import "./UiMessages.css";
 
-export default function UiMessages() {
-  return <p className='ui-messages'>This is the default message</p>;
+export default function UiMessages({ message }) {
+  return <p className='ui-messages'>🖐️ {message}</p>;
 }
