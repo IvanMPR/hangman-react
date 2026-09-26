@@ -6,3 +6,6 @@
   margin-bottom: 20px;
   /* visibility: hidden; */
 }
+.ui-messages.hidden {
+  visibility: hidden;
+}
