@@ -3,10 +3,13 @@ import PreviousGuesses from "./PreviousGuesses";
 
 import "./UserInputs.css";
 
-export default function UserInputs() {
+export default function UserInputs({ setGuessedLetter, setMessage }) {
   return (
     <div className='user-inputs'>
-      <GuessedWordInput />
+      <GuessedWordInput
+        setGuessedLetter={setGuessedLetter}
+        setMessage={setMessage}
+      />
       <PreviousGuesses />
     </div>
   );
