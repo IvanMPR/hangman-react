@@ -4,7 +4,9 @@ export default async function fetchStates() {
   if (!response.ok) throw new Error("Fetching data failed !");
 
   const data = await response.json();
-  const names = data?.data?.states.map(currentState => currentState.state);
+  const names = data?.data?.states.map(currentState =>
+    currentState.state.toUpperCase(),
+  );
 
   if (!Array.isArray(names)) throw new Error("Unexpected payload shape");
 
