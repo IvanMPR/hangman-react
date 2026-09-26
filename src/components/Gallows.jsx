@@ -1,9 +1,9 @@
 import "./Gallows.css";
 
-export default function Gallows() {
+export default function Gallows({ misses }) {
   return (
     <div className='gallows'>
-      <img src='/images/Hang0.png' />
+      <img src={`/images/Hang${misses}.png`} />
     </div>
   );
 }

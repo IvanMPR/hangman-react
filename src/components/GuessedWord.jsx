@@ -7,7 +7,6 @@ export default function GuessedWord({
 }) {
   function processWord(word) {
     if (word) {
-      console.log(word, previousGuesses, "from processWord");
       const parsedWord = word.split("").map(letter => {
         if (letter === " ") return letter;
         if (previousGuesses.includes(letter)) {

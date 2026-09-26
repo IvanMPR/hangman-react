@@ -16,11 +16,17 @@ function App() {
   const [currentState, setCurrentState] = useState("");
   const [guessedLetter, setGuessedLetter] = useState("");
   const [previousGuesses, setPreviousGuesses] = useState([]);
+  // Derived state
+  const misses = currentState
+    ? previousGuesses.filter(
+        letter => !currentState.toUpperCase().includes(letter),
+      ).length
+    : 0;
 
   return (
     <>
       <Title />
-      <Gallows />
+      <Gallows misses={misses} />
       <GuessedWord
         currentState={currentState}
         previousGuesses={previousGuesses}
