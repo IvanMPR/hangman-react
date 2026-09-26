@@ -2,6 +2,7 @@ import "./StartButton.css";
 
 import fetchStates from "../utils/api";
 import { shuffle } from "../utils/shuffle";
+import { playSound } from "../utils/sounds";
 
 export default function StartButton({
   states,
@@ -17,6 +18,7 @@ export default function StartButton({
       setStates(names);
       setCurrentState(shuffle([...names])[0]);
       setIsGamePlayed(true);
+      playSound("start");
     } catch (error) {
       console.log(error);
       setMessage(error.message);
