@@ -37,6 +37,7 @@ function App() {
       setIsGamePlayed(false);
       playSound("win");
       setMessage(`You won! Congratulations`);
+      setPreviousGuesses([]);
     }
   }, [isGamePlayed, isWon]);
 
