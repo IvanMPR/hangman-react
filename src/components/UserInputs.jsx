@@ -8,6 +8,7 @@ export default function UserInputs({
   previousGuesses,
   setPreviousGuesses,
   setMessage,
+  currentState,
 }) {
   return (
     <div className='user-inputs'>
@@ -16,6 +17,7 @@ export default function UserInputs({
         setMessage={setMessage}
         setPreviousGuesses={setPreviousGuesses}
         previousGuesses={previousGuesses}
+        currentState={currentState}
       />
       <PreviousGuessesContainer previousGuesses={previousGuesses} />
     </div>

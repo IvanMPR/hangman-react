@@ -1,10 +1,12 @@
 import { useRef } from "react";
 import "./GuessedWordInput.css";
+import { hitOrMissSound } from "../utils/sounds";
 
 export default function GuessedWordInput({
   setPreviousGuesses,
   setGuessedLetter,
   setMessage,
+  currentState,
 }) {
   const inputRef = useRef(null);
 
@@ -23,6 +25,7 @@ export default function GuessedWordInput({
     }
     setGuessedLetter(value);
     setPreviousGuesses(prev => [...prev, value]);
+    hitOrMissSound(value, currentState.toUpperCase());
     clearAndFocusInput();
   }
 

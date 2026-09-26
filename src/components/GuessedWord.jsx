@@ -4,6 +4,7 @@ export default function GuessedWord({
   currentState,
   isTheGamePlayed,
   previousGuesses,
+  setMessage,
 }) {
   function processWord(word) {
     if (word) {

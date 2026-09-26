@@ -13,6 +13,7 @@ export default function StartButton({
   setCurrentState,
 }) {
   async function onStart() {
+    setMessage("");
     try {
       const names = states.length ? states : await fetchStates();
       setStates(names);
