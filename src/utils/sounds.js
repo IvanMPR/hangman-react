@@ -18,3 +18,8 @@ export function playSound(name) {
   audio.currentTime = 0; // restart if it's already playing
   audio.play().catch(() => {}); // ignore autoplay/interrupt rejections
 }
+
+export function hitOrMissSound(letter, word) {
+  if (word.includes(letter)) playSound("hit");
+  else playSound("miss");
+}

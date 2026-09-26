@@ -7,6 +7,8 @@ import StartButton from "./components/StartButton";
 import Title from "./components/Title";
 import UiMessages from "./components/UiMessages";
 
+import { hitOrMissSound } from "./utils/sounds";
+
 import "./App.css";
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
         letter => !currentState.toUpperCase().includes(letter),
       ).length
     : 0;
+
+  hitOrMissSound(guessedLetter, currentState);
 
   return (
     <>
