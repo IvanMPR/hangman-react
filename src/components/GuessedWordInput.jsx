@@ -1,7 +1,11 @@
 import { useRef } from "react";
 import "./GuessedWordInput.css";
 
-export default function GuessedWordInput({ setGuessedLetter, setMessage }) {
+export default function GuessedWordInput({
+  setPreviousGuesses,
+  setGuessedLetter,
+  setMessage,
+}) {
   const inputRef = useRef(null);
 
   function clearAndFocusInput() {
@@ -11,13 +15,14 @@ export default function GuessedWordInput({ setGuessedLetter, setMessage }) {
 
   function onPlacedGuess() {
     setMessage("");
-    const value = inputRef.current.value;
+    const value = inputRef.current.value.toUpperCase();
     if (!/^[a-z]$/i.test(value)) {
       setMessage("Letters only please !");
       clearAndFocusInput();
       return;
     }
     setGuessedLetter(value);
+    setPreviousGuesses(prev => [...prev, value]);
     clearAndFocusInput();
   }
 
