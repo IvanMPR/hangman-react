@@ -1,9 +1,11 @@
 import "./GuessedWord.css";
 
-export default function GuessedWord() {
+export default function GuessedWord({ currentState, isTheGamePlayed }) {
   return (
     <div className='guessed-word-div'>
-      <h2 className='guessed-word'>guess the hidden word</h2>
+      <h2 className='guessed-word'>
+        {!isTheGamePlayed ? "guess the hidden word" : currentState}
+      </h2>
     </div>
   );
 }
