@@ -1,19 +1,17 @@
 import "./GuessedWord.css";
 
-export default function GuessedWord({
-  currentState,
-  isTheGamePlayed,
-  previousGuesses,
-  setMessage,
-}) {
+export default function GuessedWord({ currentState, previousGuesses }) {
   function processWord(word) {
     if (word) {
-      const parsedWord = word.split("").map(letter => {
-        if (letter === " ") return letter;
-        if (previousGuesses.includes(letter)) {
-          return letter;
-        } else return "_";
-      });
+      const parsedWord = word
+        .toUpperCase()
+        .split("")
+        .map(letter => {
+          if (letter === " ") return letter;
+          if (previousGuesses.includes(letter)) {
+            return letter;
+          } else return "_";
+        });
       return parsedWord.join("");
     }
   }
@@ -21,7 +19,7 @@ export default function GuessedWord({
   return (
     <div className='guessed-word-div'>
       <h2 className='guessed-word'>
-        {!isTheGamePlayed ? "guess the hidden word" : parsedWord}
+        {!currentState ? "guess the hidden word" : parsedWord}
       </h2>
     </div>
   );

@@ -11,6 +11,7 @@ export default function StartButton({
   setIsGamePlayed,
   setMessage,
   setCurrentState,
+  setPreviousGuesses,
 }) {
   async function onStart() {
     setMessage("");
@@ -18,6 +19,7 @@ export default function StartButton({
       const names = states.length ? states : await fetchStates();
       setStates(names);
       setCurrentState(shuffle([...names])[0]);
+      setPreviousGuesses([]);
       setIsGamePlayed(true);
       playSound("start");
     } catch (error) {

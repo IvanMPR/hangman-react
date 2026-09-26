@@ -36,8 +36,7 @@ function App() {
     if (isGamePlayed && isWon) {
       setIsGamePlayed(false);
       playSound("win");
-      setMessage(`You won! Congratulations`);
-      setPreviousGuesses([]);
+      setMessage(`You won!🏆 Congratulations!`);
     }
   }, [isGamePlayed, isWon]);
 
@@ -49,8 +48,6 @@ function App() {
         currentState={currentState}
         previousGuesses={previousGuesses}
         setPreviousGuesses={setPreviousGuesses}
-        isTheGamePlayed={isGamePlayed}
-        setMessage={setMessage}
       />
       <UiMessages message={message} />
       {isGamePlayed && (
@@ -72,6 +69,7 @@ function App() {
         states={states}
         setMessage={setMessage}
         setCurrentState={setCurrentState}
+        setPreviousGuesses={setPreviousGuesses}
       />
     </>
   );

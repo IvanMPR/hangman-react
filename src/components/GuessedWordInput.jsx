@@ -3,6 +3,7 @@ import "./GuessedWordInput.css";
 import { hitOrMissSound } from "../utils/sounds";
 
 export default function GuessedWordInput({
+  previousGuesses,
   setPreviousGuesses,
   setGuessedLetter,
   setMessage,
@@ -20,6 +21,11 @@ export default function GuessedWordInput({
     const value = inputRef.current.value.toUpperCase();
     if (!/^[a-z]$/i.test(value)) {
       setMessage("Letters only please !");
+      clearAndFocusInput();
+      return;
+    }
+    if (previousGuesses.includes(value)) {
+      setMessage(`You already tried '${value}!'`);
       clearAndFocusInput();
       return;
     }
