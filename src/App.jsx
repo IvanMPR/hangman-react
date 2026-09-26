@@ -15,12 +15,19 @@ function App() {
   const [message, setMessage] = useState("");
   const [currentState, setCurrentState] = useState("");
   const [guessedLetter, setGuessedLetter] = useState("");
+  const [previousGuesses, setPreviousGuesses] = useState([]);
 
   return (
     <>
       <Title />
       <Gallows />
-      <GuessedWord currentState={currentState} isTheGamePlayed={isGamePlayed} />
+      <GuessedWord
+        currentState={currentState}
+        previousGuesses={previousGuesses}
+        setPreviousGuesses={setPreviousGuesses}
+        isTheGamePlayed={isGamePlayed}
+        setMessage={setMessage}
+      />
       <UiMessages message={message} />
       {isGamePlayed && (
         <UserInputs
@@ -29,6 +36,8 @@ function App() {
           setGuessedLetter={setGuessedLetter}
           guessedLetter={guessedLetter}
           setMessage={setMessage}
+          previousGuesses={previousGuesses}
+          setPreviousGuesses={setPreviousGuesses}
         />
       )}
       <StartButton
