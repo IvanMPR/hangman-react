@@ -16,7 +16,8 @@ export default function GuessedWordInput({
     inputRef.current.focus();
   }
 
-  function onPlacedGuess() {
+  function onPlacedGuess(e) {
+    e.preventDefault();
     setMessage("");
     const value = inputRef.current.value.toUpperCase();
     if (!/^[a-z]$/i.test(value)) {
@@ -36,7 +37,7 @@ export default function GuessedWordInput({
   }
 
   return (
-    <div className='guessed-word-input-div'>
+    <form className='guessed-word-input-div' onSubmit={onPlacedGuess}>
       <label htmlFor='guessed-word-input' className='guessed-word-label'>
         Place Guess
       </label>
@@ -47,9 +48,9 @@ export default function GuessedWordInput({
         maxLength={1}
         ref={inputRef}
       />
-      <button className='guessed-word-button' onClick={onPlacedGuess}>
+      <button type='submit' className='guessed-word-button'>
         Place Guess
       </button>
-    </div>
+    </form>
   );
 }

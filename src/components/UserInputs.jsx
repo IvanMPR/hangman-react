@@ -18,7 +18,6 @@ export default function UserInputs({
         setPreviousGuesses={setPreviousGuesses}
         previousGuesses={previousGuesses}
         currentState={currentState}
-        previousGuesses={previousGuesses}
       />
       <PreviousGuessesContainer previousGuesses={previousGuesses} />
     </div>
