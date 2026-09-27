@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import "./GuessedWordInput.css";
-import { hitOrMissSound } from "../utils/sounds";
+import { playSound, hitOrMissSound } from "../utils/sounds";
 
 export default function GuessedWordInput({
   previousGuesses,
@@ -8,6 +8,7 @@ export default function GuessedWordInput({
   setGuessedLetter,
   setMessage,
   currentState,
+  setIsGamePlayed,
 }) {
   const inputRef = useRef(null);
 
@@ -30,9 +31,23 @@ export default function GuessedWordInput({
       clearAndFocusInput();
       return;
     }
+    const nextGuesses = [...previousGuesses, value];
     setGuessedLetter(value);
-    setPreviousGuesses(prev => [...prev, value]);
-    hitOrMissSound(value, currentState.toUpperCase());
+    setPreviousGuesses(nextGuesses);
+
+    const word = currentState.toUpperCase();
+    const isWon = word
+      .split("")
+      .every(letter => letter === " " || nextGuesses.includes(letter));
+
+    if (isWon) {
+      playSound("win");
+      setMessage("You won!🏆 Congratulations!");
+      setIsGamePlayed(false);
+      return;
+    }
+
+    hitOrMissSound(value, word);
     clearAndFocusInput();
   }
 

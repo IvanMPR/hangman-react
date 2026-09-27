@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import Gallows from "./components/Gallows";
 import GuessedWord from "./components/GuessedWord";
@@ -6,8 +6,6 @@ import UserInputs from "./components/UserInputs";
 import StartButton from "./components/StartButton";
 import Title from "./components/Title";
 import UiMessages from "./components/UiMessages";
-
-import { playSound } from "./utils/sounds";
 
 import "./App.css";
 
@@ -24,21 +22,6 @@ function App() {
         letter => !currentState.toUpperCase().includes(letter),
       ).length
     : 0;
-
-  const isWon =
-    Boolean(currentState) &&
-    currentState
-      .toUpperCase()
-      .split("")
-      .every(letter => letter === " " || previousGuesses.includes(letter));
-
-  useEffect(() => {
-    if (isGamePlayed && isWon) {
-      setIsGamePlayed(false);
-      playSound("win");
-      setMessage(`You won!🏆 Congratulations!`);
-    }
-  }, [isGamePlayed, isWon]);
 
   return (
     <>
@@ -60,6 +43,7 @@ function App() {
           previousGuesses={previousGuesses}
           setPreviousGuesses={setPreviousGuesses}
           currentState={currentState}
+          setIsGamePlayed={setIsGamePlayed}
         />
       )}
       <StartButton
