@@ -34,7 +34,7 @@ function App() {
       return;
     }
     if (previousGuesses.includes(value)) {
-      setMessage(`You already tried '${value}!'`);
+      setMessage(`You already tried '${value}'!`);
       return;
     }
     const nextGuesses = [...previousGuesses, value];
