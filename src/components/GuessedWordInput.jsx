@@ -22,6 +22,7 @@ export default function GuessedWordInput({ onGuess }) {
         className='guessed-word-input'
         maxLength={1}
         ref={inputRef}
+        autoFocus
       />
       <button type='submit' className='guessed-word-button'>
         Place Guess
