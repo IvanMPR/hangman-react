@@ -6,7 +6,7 @@ export default async function fetchStates() {
   if (!response.ok) throw new Error("Fetching data failed !");
 
   const data = await response.json();
-  const names = data?.data?.states.map(currentState =>
+  const names = data?.data?.states?.map(currentState =>
     currentState.state.toUpperCase(),
   );
 
