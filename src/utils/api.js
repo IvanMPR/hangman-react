@@ -1,5 +1,7 @@
 export default async function fetchStates() {
-  const response = await fetch("http://localhost:3000/api/v1/states");
+  const response = await fetch("http://localhost:3000/api/v1/states", {
+    signal: AbortSignal.timeout(7000),
+  });
 
   if (!response.ok) throw new Error("Fetching data failed !");
 

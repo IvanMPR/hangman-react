@@ -10,7 +10,9 @@ import UiMessages from "./components/UiMessages";
 import { playSound, hitOrMissSound } from "./utils/sounds";
 
 import "./App.css";
+
 const MAX_MISSES = 10;
+
 function App() {
   const [states, setStates] = useState([]);
   const [isGamePlayed, setIsGamePlayed] = useState(false);
