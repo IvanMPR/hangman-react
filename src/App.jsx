@@ -7,6 +7,8 @@ import StartButton from "./components/StartButton";
 import Title from "./components/Title";
 import UiMessages from "./components/UiMessages";
 
+import { playSound, hitOrMissSound } from "./utils/sounds";
+
 import "./App.css";
 
 function App() {
@@ -14,7 +16,6 @@ function App() {
   const [isGamePlayed, setIsGamePlayed] = useState(false);
   const [message, setMessage] = useState("");
   const [currentState, setCurrentState] = useState("");
-  const [guessedLetter, setGuessedLetter] = useState("");
   const [previousGuesses, setPreviousGuesses] = useState([]);
 
   const misses = currentState
@@ -23,28 +24,43 @@ function App() {
       ).length
     : 0;
 
+  function handleGuess(letter) {
+    setMessage("");
+    const value = letter.toUpperCase();
+    if (!/^[a-z]$/i.test(value)) {
+      setMessage("Letters only please !");
+      return;
+    }
+    if (previousGuesses.includes(value)) {
+      setMessage(`You already tried '${value}!'`);
+      return;
+    }
+    const nextGuesses = [...previousGuesses, value];
+    setPreviousGuesses(nextGuesses);
+
+    const word = currentState.toUpperCase();
+    const isWon = word
+      .split("")
+      .every(l => l === " " || nextGuesses.includes(l));
+
+    if (isWon) {
+      playSound("win");
+      setMessage("You won!🏆 Congratulations!");
+      setIsGamePlayed(false);
+      return;
+    }
+
+    hitOrMissSound(value, word);
+  }
+
   return (
     <>
       <Title />
       <Gallows misses={misses} />
-      <GuessedWord
-        currentState={currentState}
-        previousGuesses={previousGuesses}
-        setPreviousGuesses={setPreviousGuesses}
-      />
+      <GuessedWord currentState={currentState} previousGuesses={previousGuesses} />
       <UiMessages message={message} />
       {isGamePlayed && (
-        <UserInputs
-          setStates={setStates}
-          message={message}
-          setGuessedLetter={setGuessedLetter}
-          guessedLetter={guessedLetter}
-          setMessage={setMessage}
-          previousGuesses={previousGuesses}
-          setPreviousGuesses={setPreviousGuesses}
-          currentState={currentState}
-          setIsGamePlayed={setIsGamePlayed}
-        />
+        <UserInputs onGuess={handleGuess} previousGuesses={previousGuesses} />
       )}
       <StartButton
         isGamePlayed={isGamePlayed}

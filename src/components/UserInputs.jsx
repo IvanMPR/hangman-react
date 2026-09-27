@@ -3,24 +3,10 @@ import PreviousGuessesContainer from "./PreviousGuessesContainer";
 
 import "./UserInputs.css";
 
-export default function UserInputs({
-  setGuessedLetter,
-  previousGuesses,
-  setPreviousGuesses,
-  setMessage,
-  currentState,
-  setIsGamePlayed,
-}) {
+export default function UserInputs({ onGuess, previousGuesses }) {
   return (
     <div className='user-inputs'>
-      <GuessedWordInput
-        setGuessedLetter={setGuessedLetter}
-        setMessage={setMessage}
-        setPreviousGuesses={setPreviousGuesses}
-        previousGuesses={previousGuesses}
-        currentState={currentState}
-        setIsGamePlayed={setIsGamePlayed}
-      />
+      <GuessedWordInput onGuess={onGuess} />
       <PreviousGuessesContainer previousGuesses={previousGuesses} />
     </div>
   );

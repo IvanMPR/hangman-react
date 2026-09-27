@@ -1,54 +1,14 @@
 import { useRef } from "react";
 import "./GuessedWordInput.css";
-import { playSound, hitOrMissSound } from "../utils/sounds";
 
-export default function GuessedWordInput({
-  previousGuesses,
-  setPreviousGuesses,
-  setGuessedLetter,
-  setMessage,
-  currentState,
-  setIsGamePlayed,
-}) {
+export default function GuessedWordInput({ onGuess }) {
   const inputRef = useRef(null);
-
-  function clearAndFocusInput() {
-    inputRef.current.value = "";
-    inputRef.current.focus();
-  }
 
   function onPlacedGuess(e) {
     e.preventDefault();
-    setMessage("");
-    const value = inputRef.current.value.toUpperCase();
-    if (!/^[a-z]$/i.test(value)) {
-      setMessage("Letters only please !");
-      clearAndFocusInput();
-      return;
-    }
-    if (previousGuesses.includes(value)) {
-      setMessage(`You already tried '${value}!'`);
-      clearAndFocusInput();
-      return;
-    }
-    const nextGuesses = [...previousGuesses, value];
-    setGuessedLetter(value);
-    setPreviousGuesses(nextGuesses);
-
-    const word = currentState.toUpperCase();
-    const isWon = word
-      .split("")
-      .every(letter => letter === " " || nextGuesses.includes(letter));
-
-    if (isWon) {
-      playSound("win");
-      setMessage("You won!🏆 Congratulations!");
-      setIsGamePlayed(false);
-      return;
-    }
-
-    hitOrMissSound(value, word);
-    clearAndFocusInput();
+    onGuess(inputRef.current.value);
+    inputRef.current.value = "";
+    inputRef.current.focus();
   }
 
   return (
